@@ -1,0 +1,246 @@
+<div class="post-card post-detail">
+  <h1 class="post-title">🏷️ 标签云</h1>
+  <p class="tags-description">这里展示了博客中所有文章的标签分类，点击标签可以查看相关文章。</p>
+</div>
+
+<div class="tag-cloud-container">
+  <% if (site.tags && site.tags.length) { %>
+    <div class="tag-cloud">
+      <% site.tags.sort('name').each(function(tag) { %>
+        <% 
+          // 计算标签权重，用于调整字体大小
+          var weight = Math.min(Math.max(tag.posts.length, 1), 10);
+          var fontSize = 0.8 + (weight * 0.15); // 0.8rem 到 2.3rem
+          var opacity = 0.6 + (weight * 0.04); // 0.6 到 1.0
+        %>
+        <a href="<%- url_for(tag.path) %>" 
+           class="tag-cloud-item" 
+           style="font-size: <%= fontSize %>rem; opacity: <%= opacity %>;"
+           data-count="<%= tag.posts.length %>">
+          <%= tag.name %>
+          <span class="tag-count">(<%= tag.posts.length %>)</span>
+        </a>
+      <% }) %>
+    </div>
+  <% } else { %>
+    <div class="no-tags">
+      <p>暂无标签</p>
+    </div>
+  <% } %>
+</div>
+
+<div class="tag-stats">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-number"><%= site.tags.length %></div>
+      <div class="stat-label">总标签数</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number"><%= site.posts.length %></div>
+      <div class="stat-label">总文章数</div>
+    </div>
+    <div class="stat-item">
+      <% 
+        var avgTagsPerPost = site.posts.length > 0 ? 
+          (site.posts.reduce(function(sum, post) { 
+            return sum + (post.tags ? post.tags.length : 0); 
+          }, 0) / site.posts.length).toFixed(1) : 0;
+      %>
+      <div class="stat-number"><%= avgTagsPerPost %></div>
+      <div class="stat-label">平均标签/文章</div>
+    </div>
+  </div>
+</div>
+
+<style>
+.tags-description {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.tag-cloud-container {
+  margin: 2rem 0;
+}
+
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  min-height: 200px;
+}
+
+.tag-cloud-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem 1rem;
+  background: var(--border-light);
+  color: var(--text-primary);
+  text-decoration: none;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border);
+  transition: all var(--transition-normal);
+  font-weight: 500;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.tag-cloud-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.tag-cloud-item:hover::before {
+  left: 100%;
+}
+
+.tag-cloud-item:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: var(--shadow-lg);
+}
+
+.tag-count {
+  font-size: 0.85em;
+  opacity: 0.8;
+  font-weight: normal;
+}
+
+.tag-cloud-item:hover .tag-count {
+  opacity: 0.9;
+}
+
+.no-tags {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted);
+}
+
+.tag-stats {
+  margin-top: 3rem;
+  padding: 2rem;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 2rem;
+  text-align: center;
+}
+
+.stat-item {
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  background: var(--border-light);
+  transition: all var(--transition-normal);
+}
+
+.stat-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* 暗色主题适配 */
+.dark-theme .tag-cloud {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+.dark-theme .tag-cloud-item {
+  background: var(--background);
+  color: var(--text-primary);
+  border-color: var(--border);
+}
+
+.dark-theme .tag-cloud-item:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.dark-theme .tag-stats {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+.dark-theme .stat-item {
+  background: var(--background);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .tag-cloud {
+    padding: 1rem;
+    gap: 0.5rem;
+  }
+  
+  .tag-cloud-item {
+    font-size: 0.85rem !important;
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .stat-number {
+    font-size: 1.5rem;
+  }
+}
+
+/* 标签云动画效果 */
+.tag-cloud-item {
+  animation: fadeInUp 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+.tag-cloud-item:nth-child(1) { animation-delay: 0.1s; }
+.tag-cloud-item:nth-child(2) { animation-delay: 0.15s; }
+.tag-cloud-item:nth-child(3) { animation-delay: 0.2s; }
+.tag-cloud-item:nth-child(4) { animation-delay: 0.25s; }
+.tag-cloud-item:nth-child(5) { animation-delay: 0.3s; }
+.tag-cloud-item:nth-child(n+6) { animation-delay: 0.35s; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>

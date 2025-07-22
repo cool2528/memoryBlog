@@ -1,0 +1,407 @@
+/* 防止主题切换闪烁 */
+.theme-loading {
+  visibility: hidden;
+}
+
+.theme-loaded {
+  visibility: visible;
+}
+
+/* 暗色主题样式 */
+.dark-theme {
+  /* 暗色主题色彩变量 */
+  --background: #0f172a;
+  --surface: #1e293b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --border: #334155;
+  --border-light: #475569;
+}
+
+/* 确保html元素也应用暗色主题 */
+html.dark-theme {
+  --background: #0f172a;
+  --surface: #1e293b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --border: #334155;
+  --border-light: #475569;
+}
+
+.dark-theme .site-header {
+  background: rgba(15, 23, 42, 0.95);
+  border-bottom-color: var(--border);
+}
+
+.dark-theme .post-card {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+.dark-theme .post-card:hover {
+  /* 移除动画效果，保持静态样式 */
+}
+
+.dark-theme .search-input {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+
+.dark-theme .search-input::placeholder {
+  color: var(--text-muted);
+}
+
+.dark-theme .pagination-btn,
+.dark-theme .pagination-page {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+
+.dark-theme .page-info {
+  background: var(--surface);
+  color: var(--text-secondary);
+}
+
+.dark-theme .tag-cloud-item {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+/* 暗色主题过渡动画 */
+body {
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+.post-card,
+.search-input,
+.pagination-btn,
+.pagination-page,
+.page-info,
+.tag-cloud-item {
+  transition: background-color var(--transition-normal), 
+              border-color var(--transition-normal), 
+              color var(--transition-normal);
+}
+
+/* 修复文章页面和页面底部的暗色主题样式 */
+.dark-theme .post-detail {
+  background: var(--surface);
+  color: var(--text-primary);
+}
+
+.dark-theme .post-content {
+  color: var(--text-primary);
+}
+
+.dark-theme .post-content h1,
+.dark-theme .post-content h2,
+.dark-theme .post-content h3,
+.dark-theme .post-content h4,
+.dark-theme .post-content h5,
+.dark-theme .post-content h6 {
+  color: var(--text-primary);
+}
+
+.dark-theme .post-content p,
+.dark-theme .post-content li,
+.dark-theme .post-content td,
+.dark-theme .post-content th {
+  color: var(--text-secondary);
+}
+
+.dark-theme .post-content blockquote {
+  background: rgba(30, 41, 59, 0.5);
+  border-left-color: var(--primary);
+  color: var(--text-secondary);
+}
+
+.dark-theme .post-content code {
+  background: rgba(30, 41, 59, 0.8);
+  color: var(--text-primary);
+}
+
+.dark-theme .post-content pre {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+.dark-theme .post-nav a {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+
+.dark-theme .post-nav a:hover {
+  background: var(--border);
+}
+
+.dark-theme .site-footer {
+  background: var(--surface);
+  border-top-color: var(--border);
+  color: var(--text-secondary);
+}
+
+.dark-theme .site-footer a {
+  color: var(--primary);
+}
+
+/* 修复logo背景色 */
+.dark-theme .logo svg rect {
+  fill: var(--primary);
+}
+
+.dark-theme .logo-text {
+  color: var(--text-primary);
+}
+
+/* 修复表格样式 */
+.dark-theme .post-content table {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+.dark-theme .post-content table th {
+  background: rgba(30, 41, 59, 0.8);
+  color: var(--text-primary);
+  border-color: var(--border);
+}
+
+.dark-theme .post-content table td {
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+.dark-theme .post-content table tr:nth-child(even) {
+  background: rgba(30, 41, 59, 0.3);
+}
+
+/* 修复链接颜色 */
+.dark-theme .post-content a {
+  color: var(--primary);
+}
+
+.dark-theme .post-content a:hover {
+  color: var(--primary-light);
+}
+
+/* 修复代码块样式 */
+.dark-theme .post-content pre[class*="language-"] {
+  background: #1e293b !important;
+  border: 1px solid var(--border);
+}
+
+.dark-theme .post-content code[class*="language-"] {
+  background: #1e293b !important;
+}
+
+/* 修复搜索结果样式 */
+.dark-theme .search-results {
+  background: var(--surface);
+  border-color: var(--border);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3), 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.dark-theme .search-result-item {
+  border-bottom-color: var(--border);
+}
+
+.dark-theme .search-result-item:hover {
+  background: var(--border);
+}
+
+.dark-theme .search-result-title {
+  color: var(--text-primary);
+}
+
+.dark-theme .search-result-excerpt {
+  color: var(--text-secondary);
+}
+
+.dark-theme .search-no-results {
+  color: var(--text-muted);
+}
+
+/* 主题切换按钮样式 */
+.theme-toggle {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
+  transition: var(--transition-normal);
+  margin-left: var(--space-md);
+}
+
+.theme-toggle:hover {
+  background: var(--border-light);
+  color: var(--primary);
+}
+
+.dark-theme .theme-toggle:hover {
+  background: var(--border);
+}
+
+/* 修复导航栏hover效果 */
+.dark-theme .site-nav a {
+  color: var(--text-secondary);
+  transition: color var(--transition-normal), background-color var(--transition-normal);
+}
+
+.dark-theme .site-nav a:hover {
+  color: var(--primary);
+  background: var(--border-light);
+}
+
+.dark-theme .site-nav a.active {
+  color: var(--primary);
+  background: var(--border-light);
+}
+
+/* 修复标签hover效果 */
+.dark-theme .post-tag-link {
+  color: var(--text-muted);
+  background: var(--surface);
+  border-color: var(--border);
+  transition: all var(--transition-normal);
+}
+
+.dark-theme .post-tag-link:hover {
+  color: var(--primary);
+  background: var(--border-light);
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+
+/* 修复标签云hover效果 */
+.dark-theme .tag-cloud-item:hover {
+  color: var(--primary);
+  background: var(--border-light);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 修复logo hover效果 */
+.dark-theme .logo:hover {
+  transform: scale(1.05);
+}
+
+.dark-theme .logo:hover .logo-text {
+  color: var(--primary);
+}
+
+.dark-theme .logo:hover svg rect {
+  fill: var(--primary-light);
+}
+
+/* 移除文章标题hover效果 */
+.dark-theme .post-title:hover {
+  /* 保持原始颜色，不添加hover效果 */
+}
+
+/* 修复阅读更多按钮hover效果 */
+.dark-theme .read-more:hover {
+  background: var(--primary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+/* 修复友链卡片样式 */
+.dark-theme .friend-card {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+.dark-theme .friend-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  border-color: var(--primary);
+}
+
+.dark-theme .friend-card:hover .friend-name {
+  color: var(--primary);
+}
+
+.dark-theme .friend-name {
+  color: var(--primary);
+}
+
+.dark-theme .friend-descr {
+  color: var(--text-muted);
+}
+
+.dark-theme .friend-avatar img {
+  border-color: var(--border);
+}
+
+/* 标签页面暗色主题 */
+.dark-theme .tag-cloud-item {
+  background: var(--surface);
+  color: var(--text-secondary);
+  border-color: var(--border);
+}
+
+.dark-theme .tag-cloud-item:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.dark-theme .tags-stats {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+.dark-theme .stat-item {
+  background: var(--border);
+}
+
+.dark-theme .stat-item:hover {
+  background: var(--border-light);
+}
+
+.dark-theme .stat-number {
+  color: var(--primary);
+}
+
+.dark-theme .stat-label {
+  color: var(--text-secondary);
+}
+
+.dark-theme .stat-detail {
+  color: var(--text-muted);
+}
+
+.dark-theme .no-tags {
+  color: var(--text-muted);
+}
+
+/* 修复分页按钮hover效果 */
+.dark-theme .pagination-btn:hover,
+.dark-theme .pagination-page:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+
+/* 修复文章导航hover效果 */
+.dark-theme .post-prev:hover,
+.dark-theme .post-next:hover {
+  background: var(--border-light);
+  color: var(--primary);
+  transform: translateX(4px);
+}
+
+.dark-theme .post-prev:hover {
+  transform: translateX(-4px);
+}

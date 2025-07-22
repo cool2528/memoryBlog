@@ -1,0 +1,102 @@
+<% page.posts.each(function(post){ %>
+  <article class="post-card">
+    <a href="<%= url_for(post.path) %>" class="post-title"><%= post.title %></a>
+    <div class="post-meta">
+      <span><i class="bi bi-calendar3"></i> <%= date(post.date, 'YYYY-MM-DD') %></span>
+      <span><i class="bi bi-file-earmark-word"></i> <%= post.word_count %> 字</span>
+      <span><i class="bi bi-clock"></i> <%= post.min2read %> 分钟</span>
+      <% if (post.tags && post.tags.length) { %>
+        <span class="post-tags">
+          <i class="bi bi-tags"></i>
+          <% post.tags.each(function(tag){ %>
+            <a href="<%= url_for(tag.path) %>" class="post-tag-link"><%= tag.name %></a>
+          <% }) %>
+        </span>
+      <% } %>
+    </div>
+    <div class="post-excerpt"><%- post.excerpt || post.content.substring(0, 120) %>...</div>
+    <a class="read-more" href="<%= url_for(post.path) %>">阅读全文</a>
+  </article>
+<% }) %>
+
+<!-- 分页导航 -->
+<% if (page.total > 1) { %>
+  <nav class="pagination">
+    <div class="pagination-info">
+      <span class="page-info">
+        第 <%= page.current %> 页，共 <%= page.total %> 页
+      </span>
+    </div>
+    
+    <div class="pagination-nav">
+      <% if (page.prev) { %>
+        <a href="<%= url_for(page.prev_link) %>" class="pagination-btn prev-btn">
+          <i class="bi bi-chevron-left"></i>
+          <span>上一页</span>
+        </a>
+      <% } else { %>
+        <span class="pagination-btn prev-btn disabled">
+          <i class="bi bi-chevron-left"></i>
+          <span>上一页</span>
+        </span>
+      <% } %>
+
+      <!-- 页码列表 -->
+      <div class="pagination-pages">
+        <%
+          var start = Math.max(1, page.current - 2);
+          var end = Math.min(page.total, page.current + 2);
+          
+          // 如果当前页靠近开头，显示更多后面的页码
+          if (page.current <= 3) {
+            end = Math.min(page.total, 5);
+          }
+          
+          // 如果当前页靠近结尾，显示更多前面的页码
+          if (page.current >= page.total - 2) {
+            start = Math.max(1, page.total - 4);
+          }
+        %>
+        
+        <!-- 第一页 -->
+        <% if (start > 1) { %>
+          <a href="<%= url_for(page.base) %>" class="pagination-page">1</a>
+          <% if (start > 2) { %>
+            <span class="pagination-ellipsis">...</span>
+          <% } %>
+        <% } %>
+        
+        <!-- 中间页码 -->
+        <% for (var i = start; i <= end; i++) { %>
+          <% if (i === page.current) { %>
+            <span class="pagination-page current"><%= i %></span>
+          <% } else if (i === 1) { %>
+            <a href="<%= url_for(page.base) %>" class="pagination-page"><%= i %></a>
+          <% } else { %>
+            <a href="<%= url_for(page.base + 'page/' + i + '/') %>" class="pagination-page"><%= i %></a>
+          <% } %>
+        <% } %>
+        
+        <!-- 最后一页 -->
+        <% if (end < page.total) { %>
+          <% if (end < page.total - 1) { %>
+            <span class="pagination-ellipsis">...</span>
+          <% } %>
+          <a href="<%= url_for(page.base + 'page/' + page.total + '/') %>" class="pagination-page"><%= page.total %></a>
+        <% } %>
+      </div>
+
+      <% if (page.next) { %>
+        <a href="<%= url_for(page.next_link) %>" class="pagination-btn next-btn">
+          <span>下一页</span>
+          <i class="bi bi-chevron-right"></i>
+        </a>
+      <% } else { %>
+        <span class="pagination-btn next-btn disabled">
+          <span>下一页</span>
+          <i class="bi bi-chevron-right"></i>
+        </span>
+      <% } %>
+    </div>
+  </nav>
+<% } %> 

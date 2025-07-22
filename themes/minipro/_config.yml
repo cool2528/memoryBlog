@@ -1,0 +1,18 @@
+# minipro 主题配置
+name: minipro
+author: memory
+version: 1.0.0
+main_color: "#00bcd4" # 青蓝色
+background_color: "#e0f7fa" # 淡青色
+font_family: 'Inter, "JetBrains Mono", "Fira Code", "Microsoft YaHei", sans-serif' 
+
+# 友情链接
+friends:
+  - name: Hexo 官网
+    link: https://hexo.io/
+    avatar: https://hexo.io/logo.svg
+    descr: 快速、简洁且高效的博客框架
+  - name: MDN Web Docs
+    link: https://developer.mozilla.org/zh-CN/
+    avatar: https://developer.mozilla.org/favicon.svg
+    descr: 服务 Web 开发者的资源

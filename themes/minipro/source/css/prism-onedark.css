@@ -1,0 +1,185 @@
+/* PrismJS One Dark 主题，适配极简蓝白风格 */
+/* 主要色彩来自 VSCode One Dark 主题 */
+code[class*="language-"], pre[class*="language-"] {
+  color: #abb2bf;
+  background: none;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 1em;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  line-height: 1.7;
+  tab-size: 4;
+  hyphens: none;
+}
+/* 增强代码块整体美观度 */
+pre[class*="language-"] {
+  background: #23283a;
+  border-radius: 14px;
+  padding: 1.5em 1.2em;
+  margin: 2.2em 0;
+  box-shadow: 0 4px 24px rgba(33, 118, 255, 0.13);
+  overflow-x: auto;
+  position: relative;
+  transition: box-shadow 0.2s;
+}
+pre[class*="language-"]:hover {
+  box-shadow: 0 8px 32px rgba(33, 118, 255, 0.18);
+}
+:not(pre) > code[class*="language-"] {
+  background: #23283a;
+  color: #e6e6e6;
+  border-radius: 6px;
+  padding: 0.22em 0.5em;
+  font-size: 0.98em;
+}
+/* 优化 Prism Toolbar 按钮和语言标签 */
+.prism-toolbar {
+  position: absolute;
+  top: 0.7em;
+  right: 1.2em;
+  display: flex;
+  gap: 0.5em;
+  z-index: 2;
+}
+.prism-toolbar button, .prism-toolbar span {
+  background: #2176ff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.18em 0.9em;
+  font-size: 0.85em;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(33, 118, 255, 0.15);
+  margin-left: 0.2em;
+  font-weight: 500;
+}
+.prism-toolbar button:hover {
+  background: #185ecf;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(33, 118, 255, 0.25);
+}
+.prism-toolbar button.copied {
+  background: #28a745;
+  transform: scale(0.95);
+}
+.prism-language-label {
+  background: #444b6a !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px !important;
+  cursor: default !important;
+}
+.prism-language-label:hover {
+  background: #444b6a !important;
+  transform: none !important;
+}
+/* 移动端优化 */
+@media (max-width: 600px) {
+  pre[class*="language-"] {
+    padding: 1em 0.5em;
+    font-size: 0.98em;
+  }
+  .prism-toolbar {
+    top: 0.3em;
+    right: 0.5em;
+  }
+}
+.token.comment,
+.token.prolog,
+.token.cdata {
+  color: #5c6370;
+}
+.token.punctuation {
+  color: #abb2bf;
+}
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #e06c75;
+}
+.token.boolean,
+.token.number {
+  color: #d19a66;
+}
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #98c379;
+}
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: #56b6c2;
+}
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: #61aeee;
+}
+.token.function,
+.token.class-name {
+  color: #c678dd;
+}
+.token.regex,
+.token.important,
+.token.variable {
+  color: #d19a66;
+}
+.token.bold {
+  font-weight: bold;
+}
+.token.italic {
+  font-style: italic;
+}
+.token.entity {
+  cursor: help;
+}
+/* 行号样式优化 */
+.line-numbers .line-numbers-rows {
+  border-right: 1px solid #2d334d;
+  padding-right: 1em;
+  margin-right: 1em;
+}
+.line-numbers .line-numbers-rows > span:before {
+  color: #5c6370;
+  font-size: 0.9em;
+  text-align: right;
+  min-width: 2em;
+  display: inline-block;
+}
+.line-numbers-rows {
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3em;
+  letter-spacing: -1px;
+  user-select: none;
+}
+/* 确保代码内容不与行号重叠 */
+pre[class*="language-"].line-numbers {
+  padding-left: 4em;
+  counter-reset: linenumber;
+}
+.line-numbers .line-numbers-rows > span {
+  display: block;
+  counter-increment: linenumber;
+}
+.line-numbers .line-numbers-rows > span:before {
+  content: counter(linenumber);
+  color: #5c6370;
+  display: block;
+  padding-right: 0.8em;
+  text-align: right;
+} 

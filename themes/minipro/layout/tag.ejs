@@ -1,0 +1,20 @@
+<div class="post-card post-detail">
+  <h1 class="post-title">标签：<%- page.tag %></h1>
+  <p>共找到 <%- page.posts.length %> 篇文章</p>
+</div>
+
+<div class="posts-list">
+  <% page.posts.each(function(post) { %>
+    <article class="post-card">
+      <h2 class="post-title">
+        <a href="<%- url_for(post.path) %>"><%- post.title %></a>
+      </h2>
+      <div class="post-meta">
+        <span class="post-date"><%- date(post.date, 'YYYY-MM-DD') %></span>
+      </div>
+      <% if (post.excerpt) { %>
+        <div class="post-excerpt"><%- post.excerpt %></div>
+      <% } %>
+    </article>
+  <% }) %>
+</div>

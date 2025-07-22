@@ -1,0 +1,16 @@
+<header class="site-header">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+    <div style="display:flex;align-items:center;gap:1rem;">
+      <%- partial('_partial/logo') %>
+      <nav class="site-nav">
+        <a href="/archives"<% if (page.archive) { %> class="active"<% } %>>归档</a>
+        <a href="/projects"<% if (page.path && page.path.indexOf('projects') === 0) { %> class="active"<% } %>>项目</a>
+        <a href="/tags"<% if (page.path && page.path.indexOf('tags') === 0) { %> class="active"<% } %>>标签</a>
+        <a href="/about"<% if (page.path && page.path.indexOf('about') === 0) { %> class="active"<% } %>>关于</a>
+        <a href="/friends"<% if (page.path && page.path.indexOf('friends') === 0) { %> class="active"<% } %>>友链</a>
+      </nav>
+    </div>
+    <!-- 搜索框和主题切换按钮将通过JavaScript动态添加到这里 -->
+  </div>
+</header> 
