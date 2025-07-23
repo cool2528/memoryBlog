@@ -1,0 +1,33 @@
+name: Deploy Hexo Blog to Cloudflare Pages
+
+on:
+  push:
+    branches:
+      - main  # 或 master，看你默认分支名
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Generate Hexo static files
+        run: npx hexo generate
+
+      - name: Upload to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ secrets.CF_ACCOUNT_ID }}
+          projectName: memoryBlog 
+          directory: ./public
