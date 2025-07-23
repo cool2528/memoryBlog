@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
-description: ''
+title: Memory Blog 个人小站，记录学习心得
+subtitle: 'Memory Blog 个人小站，记录学习心得'
+description: '个人小站，记录学习心得'
 keywords:
-author: John Doe
+author: Memory
 language: zh-CN
 timezone: Asia/Shanghai
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://seeked.top/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
