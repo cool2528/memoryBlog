@@ -1,0 +1,38 @@
+<!-- 统计分析代码 -->
+<% if (theme.analytics) { %>
+  <!-- Google Analytics -->
+  <% if (theme.analytics.google && theme.analytics.google.enabled && theme.analytics.google.tracking_id) { %>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=<%= theme.analytics.google.tracking_id %>"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '<%= theme.analytics.google.tracking_id %>');
+    </script>
+  <% } %>
+
+  <!-- 百度统计 -->
+  <% if (theme.analytics.baidu && theme.analytics.baidu.enabled && theme.analytics.baidu.site_id) { %>
+    <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?<%= theme.analytics.baidu.site_id %>";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  <% } %>
+
+  <!-- 51LA 统计 -->
+  <% if (theme.analytics.la51 && theme.analytics.la51.enabled && theme.analytics.la51.site_id) { %>
+    <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+    <script>LA.init({id:"<%= theme.analytics.la51.site_id %>",ck:"<%= theme.analytics.la51.site_id %>"})</script>
+  <% } %>
+
+  <!-- 自定义统计代码 - Head -->
+  <% if (theme.analytics.custom && theme.analytics.custom.enabled && theme.analytics.custom.head_code) { %>
+    <%- theme.analytics.custom.head_code %>
+  <% } %>
+<% } %>

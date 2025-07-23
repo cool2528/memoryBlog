@@ -194,9 +194,9 @@ img.lazy.loaded {
 /* 搜索框移到顶部导航栏的样式 */
 .search-container {
   position: relative;
-  margin-left: auto;
-  max-width: 300px;
+  max-width: 250px;
   flex-shrink: 0;
+  order: 1;
 }
 
 .search-input {
@@ -275,15 +275,13 @@ img.lazy.loaded {
 @media (max-width: 768px) {
   .search-container {
     max-width: 200px;
-    margin-left: 0;
     margin-top: 10px;
-    order: 3;
+    order: 2;
     width: 100%;
   }
   
-  .site-header .container {
-    flex-direction: column;
-    gap: 0.5rem;
+  .theme-toggle {
+    order: 3;
   }
   
   .back-to-top {

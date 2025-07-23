@@ -4,14 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= page.title ? page.title + ' - ' : '' %><%= config.title %></title>
-  <!-- 防止主题切换闪烁的脚本 -->
+  <!-- 防止主题切换闪烁的脚本 - 增强版 -->
   <script>
     (function() {
-      const theme = localStorage.getItem('theme');
-      if (theme === 'dark') {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      
+      if (savedTheme === 'dark') {
         document.documentElement.classList.add('dark-theme');
         document.body.classList.add('dark-theme');
+      } else {
+        document.documentElement.classList.remove('dark-theme');
+        document.body.classList.remove('dark-theme');
       }
+      
       // 立即显示页面，避免白屏
       document.addEventListener('DOMContentLoaded', function() {
         document.body.classList.remove('theme-loading');
@@ -22,6 +27,10 @@
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/dark-theme.css">
   <link rel="stylesheet" href="/css/enhanced-components.css">
+  <link rel="stylesheet" href="/css/analytics.css">
+  <!-- 配置面板相关CSS已移除 -->
+  <link rel="stylesheet" href="/css/social-links.css">
+  <link rel="stylesheet" href="/css/tmp_rovodev_theme_toggle_fix.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="/css/prism-onedark.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/toolbar/prism-toolbar.css">
@@ -34,14 +43,28 @@
   <!-- Fancybox for image lightbox -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js" defer></script>
+  <script src="/js/theme-persistence.js" defer></script>
   <script src="/js/main.js" defer></script>
   <script src="/js/enhanced-features.js" defer></script>
+  <script src="/js/config-manager.js" defer></script>
+  <script src="/js/social-links.js" defer></script>
+  <%- partial('_partial/analytics') %>
+  
+  <!-- 主题配置数据 -->
+  <script id="theme-config" type="application/json">
+    <%- JSON.stringify(theme) %>
+  </script>
 </head>
-<body class="theme-loading">
+<body class="theme-loading" id="theme-body">
   <%- partial('_partial/header') %>
   <main class="container">
     <%- body %>
   </main>
   <%- partial('_partial/footer') %>
+  
+  <!-- 自定义统计代码 - Body -->
+  <% if (theme.analytics && theme.analytics.custom && theme.analytics.custom.enabled && theme.analytics.custom.body_code) { %>
+    <%- theme.analytics.custom.body_code %>
+  <% } %>
 </body>
 </html> 

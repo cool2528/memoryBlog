@@ -1,0 +1,381 @@
+/* 配置面板样式 */
+
+.config-toggle-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
+  transition: var(--transition-normal);
+  margin-left: var(--space-md);
+}
+
+.config-toggle-btn:hover {
+  background: var(--border-light);
+  color: var(--primary);
+}
+
+.dark-theme .config-toggle-btn:hover {
+  background: var(--border);
+}
+
+.config-panel {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 400px;
+  height: 100vh;
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  box-shadow: var(--shadow-xl);
+  z-index: 9999;
+  transition: right var(--transition-normal);
+  overflow-y: auto;
+}
+
+.config-panel.open {
+  right: 0;
+}
+
+.config-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-lg);
+  border-bottom: 1px solid var(--border);
+  background: var(--background);
+}
+
+.config-panel-header h3 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.config-panel-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: var(--space-xs);
+  border-radius: var(--radius-sm);
+  transition: var(--transition-fast);
+}
+
+.config-panel-close:hover {
+  background: var(--border-light);
+  color: var(--text-primary);
+}
+
+.config-panel-content {
+  padding: var(--space-lg);
+}
+
+.config-section {
+  margin-bottom: var(--space-xl);
+}
+
+.config-section h4 {
+  margin: 0 0 var(--space-lg) 0;
+  color: var(--text-primary);
+  font-size: 1.125rem;
+  font-weight: 600;
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.config-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.config-item:last-child {
+  border-bottom: none;
+}
+
+.config-item label {
+  color: var(--text-primary);
+  font-weight: 500;
+  flex: 1;
+}
+
+.config-item input[type="color"] {
+  width: 40px;
+  height: 32px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  background: none;
+}
+
+.config-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--primary);
+}
+
+.config-item input[type="range"] {
+  flex: 0 0 120px;
+  margin-left: var(--space-md);
+  accent-color: var(--primary);
+}
+
+.config-item select {
+  padding: var(--space-xs) var(--space-sm);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.config-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.config-actions button {
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  font-weight: 500;
+}
+
+.config-actions button:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.config-actions button:active {
+  transform: translateY(1px);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .config-panel {
+    width: 100vw;
+    right: -100vw;
+  }
+  
+  .config-panel.open {
+    right: 0;
+  }
+  
+  .config-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+  
+  .config-item label {
+    margin-bottom: var(--space-xs);
+  }
+}
+
+/* 暗色主题适配 */
+.dark-theme .config-panel {
+  background: var(--surface);
+  border-left-color: var(--border);
+}
+
+.dark-theme .config-panel-header {
+  background: var(--background);
+  border-bottom-color: var(--border);
+}
+
+.dark-theme .config-panel-close:hover {
+  background: var(--border);
+}
+
+.dark-theme .config-item {
+  border-bottom-color: var(--border);
+}
+
+.dark-theme .config-item input[type="color"] {
+  border-color: var(--border);
+}
+
+.dark-theme .config-item select {
+  background: var(--background);
+  border-color: var(--border);
+}
+
+.dark-theme .config-actions button {
+  background: var(--background);
+  border-color: var(--border);
+}
+
+.dark-theme .config-actions button:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+/* 配置面板遮罩 */
+.config-panel-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-normal);
+}
+
+.config-panel-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 配置提示 */
+.config-tooltip {
+  position: absolute;
+  background: var(--text-primary);
+  color: var(--surface);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  white-space: nowrap;
+  z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-fast);
+  pointer-events: none;
+}
+
+.config-tooltip.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.config-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: var(--text-primary);
+}
+
+/* 配置保存状态 */
+.config-save-status {
+  position: fixed;
+  bottom: var(--space-lg);
+  right: var(--space-lg);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--success);
+  color: white;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-normal);
+  transform: translateY(20px);
+}
+
+.config-save-status.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* 配置重置确认 */
+.config-confirm {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-xl);
+  z-index: 10001;
+  max-width: 400px;
+  width: 90vw;
+}
+
+.config-confirm h4 {
+  margin: 0 0 var(--space-md) 0;
+  color: var(--text-primary);
+}
+
+.config-confirm p {
+  margin: 0 0 var(--space-lg) 0;
+  color: var(--text-secondary);
+}
+
+.config-confirm-actions {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: flex-end;
+}
+
+.config-confirm-actions button {
+  padding: var(--space-sm) var(--space-lg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.config-confirm-actions .confirm-btn {
+  background: var(--error);
+  color: white;
+  border-color: var(--error);
+}
+
+.config-confirm-actions .cancel-btn {
+  background: var(--surface);
+  color: var(--text-primary);
+}
+
+.config-confirm-actions button:hover {
+  transform: translateY(-1px);
+}
+
+/* 动画效果 */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.config-panel.open {
+  animation: slideInRight 0.3s ease-out;
+}
+
+.config-panel.closing {
+  animation: slideOutRight 0.3s ease-out;
+}

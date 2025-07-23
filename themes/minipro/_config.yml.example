@@ -1,14 +1,13 @@
-# minipro 主题配置
+# MinipPro 主题配置示例
+# 复制此文件为 _config.yml 并根据需要修改
+
 name: minipro
 author: memory
 version: 1.2.0
-main_color: "#00bcd4" # 青蓝色
-background_color: "#e0f7fa" # 淡青色
-font_family: 'Inter, "JetBrains Mono", "Fira Code", "Microsoft YaHei", sans-serif' 
 
 # 网站基本信息
 site:
-  logo: "/images/logo.png" # 自定义 logo 路径
+  logo: "/images/logo.png" # 自定义 logo 路径，留空使用默认
   favicon: "/images/favicon.ico" # 网站图标
   keywords: "博客,技术,前端,开发" # SEO 关键词
   description: "一个专注于技术分享的个人博客" # 网站描述
@@ -110,11 +109,11 @@ analytics:
 
 # 社交媒体配置
 social:
-  github: "cool2528" # GitHub 用户名
+  github: "" # GitHub 用户名
   twitter: "" # Twitter 用户名
   weibo: "" # 微博用户名
-  email: "fenda258@outlook.com" # 邮箱地址
-  qq: "252858527" # QQ 号码
+  email: "" # 邮箱地址
+  qq: "" # QQ 号码
   wechat: "" # 微信号
   telegram: "" # Telegram 用户名
   linkedin: "" # LinkedIn 用户名
@@ -231,3 +230,8 @@ misc:
     enabled: false
     title: "网站维护中"
     message: "网站正在维护升级，请稍后访问。"
+
+# 自定义 CSS 和 JS
+custom:
+  css: false # 是否启用自定义 CSS (source/css/custom.css)
+  js: false # 是否启用自定义 JS (source/js/custom.js)

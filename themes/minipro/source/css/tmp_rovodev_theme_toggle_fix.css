@@ -1,0 +1,74 @@
+/* 强制修复主题切换按钮被遮挡的问题 */
+
+/* 确保右侧控制区域正确显示 */
+.header-right-controls {
+    display: flex !important;
+    align-items: center !important;
+    gap: 1rem !important;
+    margin-left: auto !important;
+    flex-shrink: 0 !important;
+    z-index: 100 !important;
+    position: relative !important;
+}
+
+/* 强制主题切换按钮样式 */
+.theme-toggle {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 40px !important;
+    height: 40px !important;
+    background: none !important;
+    border: none !important;
+    color: var(--text-secondary) !important;
+    font-size: 1.25rem !important;
+    cursor: pointer !important;
+    padding: 0.5rem !important;
+    border-radius: 8px !important;
+    transition: all 0.25s ease !important;
+    order: 10 !important;
+    flex-shrink: 0 !important;
+    z-index: 101 !important;
+    position: relative !important;
+    margin-left: 0.5rem !important;
+}
+
+.theme-toggle:hover {
+    background: var(--border-light) !important;
+    color: var(--primary) !important;
+    transform: scale(1.1) !important;
+}
+
+/* 确保搜索框不会覆盖主题切换按钮 */
+.search-container {
+    order: 1 !important;
+    max-width: 220px !important;
+    flex-shrink: 1 !important;
+    margin-right: 0.5rem !important;
+}
+
+/* 搜索结果不要覆盖主题切换按钮 */
+.search-results {
+    right: 50px !important;
+    left: 0 !important;
+}
+
+/* 移动端调整 */
+@media (max-width: 768px) {
+    .header-right-controls {
+        justify-content: center !important;
+        margin-left: 0 !important;
+        order: 2 !important;
+        width: 100% !important;
+    }
+    
+    .search-container {
+        order: 1 !important;
+        max-width: 200px !important;
+    }
+    
+    .theme-toggle {
+        order: 2 !important;
+        margin-left: 1rem !important;
+    }
+}

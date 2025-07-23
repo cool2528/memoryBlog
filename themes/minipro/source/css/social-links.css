@@ -1,0 +1,176 @@
+/* 社交媒体链接样式 */
+.social-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.social-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  color: var(--text-secondary);
+  background-color: var(--border-light);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.social-link:hover {
+  transform: translateY(-3px);
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+.social-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: currentColor;
+  opacity: 0.1;
+  transition: opacity 0.3s ease;
+}
+
+.social-link:hover::before {
+  opacity: 0;
+}
+
+/* 社交媒体图标颜色 */
+.social-link:hover.social-link i.bi-github {
+  color: white;
+}
+
+.social-link:hover.social-link i.bi-twitter-x {
+  color: white;
+}
+
+.social-link:hover.social-link i.bi-sina-weibo {
+  color: white;
+}
+
+.social-link:hover.social-link i.bi-envelope-fill {
+  color: white;
+}
+
+.social-link:hover.social-link i.bi-chat-fill {
+  color: white;
+}
+
+.social-link:hover.social-link i.bi-wechat {
+  color: white;
+}
+
+.social-link:hover.social-link i.bi-telegram {
+  color: white;
+}
+
+.social-link:hover.social-link i.bi-linkedin {
+  color: white;
+}
+
+/* 社交媒体链接背景颜色 */
+.social-link[title="GitHub"]:hover {
+  background-color: #333;
+}
+
+.social-link[title="Twitter"]:hover {
+  background-color: #1DA1F2;
+}
+
+.social-link[title="微博"]:hover {
+  background-color: #E6162D;
+}
+
+.social-link[title="邮箱"]:hover {
+  background-color: #D44638;
+}
+
+.social-link[title="QQ"]:hover {
+  background-color: #12B7F5;
+}
+
+.social-link[title="微信"]:hover {
+  background-color: #07C160;
+}
+
+.social-link[title="Telegram"]:hover {
+  background-color: #0088CC;
+}
+
+.social-link[title="LinkedIn"]:hover {
+  background-color: #0077B5;
+}
+
+/* 图标样式 */
+.social-link i {
+  font-size: 1.25rem;
+  transition: all 0.3s ease;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+/* 微信二维码弹窗 (如果需要) */
+.wechat-qrcode {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-lg);
+  z-index: 1000;
+  display: none;
+}
+
+.wechat-qrcode img {
+  max-width: 200px;
+  max-height: 200px;
+}
+
+.wechat-qrcode-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: var(--text-muted);
+}
+
+/* 暗色模式适配 */
+.dark-theme .social-link {
+  background-color: var(--border);
+  color: var(--text-secondary);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .social-links {
+    gap: 0.75rem;
+  }
+  
+  .social-link {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+  
+  .social-link i {
+    font-size: 1.1rem;
+  }
+}

@@ -1,0 +1,52 @@
+<!-- 社交媒体链接 -->
+<% if (theme.social) { %>
+  <div class="social-links">
+    <% if (theme.social.github) { %>
+      <a href="https://github.com/<%= theme.social.github %>" target="_blank" rel="noopener" title="GitHub" class="social-link">
+        <i class="bi bi-github"></i>
+      </a>
+    <% } %>
+    
+    <% if (theme.social.twitter) { %>
+      <a href="https://twitter.com/<%= theme.social.twitter %>" target="_blank" rel="noopener" title="Twitter" class="social-link">
+        <i class="bi bi-twitter-x"></i>
+      </a>
+    <% } %>
+    
+    <% if (theme.social.weibo) { %>
+      <a href="https://weibo.com/<%= theme.social.weibo %>" target="_blank" rel="noopener" title="微博" class="social-link">
+        <i class="bi bi-sina-weibo"></i>
+      </a>
+    <% } %>
+    
+    <% if (theme.social.email) { %>
+      <a href="mailto:<%= theme.social.email %>" target="_blank" rel="noopener" title="邮箱" class="social-link">
+        <i class="bi bi-envelope-fill"></i>
+      </a>
+    <% } %>
+    
+    <% if (theme.social.qq) { %>
+      <a href="tencent://message/?uin=<%= theme.social.qq %>" target="_blank" rel="noopener" title="QQ" class="social-link">
+        <i class="bi bi-chat-fill"></i>
+      </a>
+    <% } %>
+    
+    <% if (theme.social.wechat) { %>
+      <a href="javascript:void(0);" class="social-link wechat-link" title="微信" data-wechat="<%= theme.social.wechat %>">
+        <i class="bi bi-wechat"></i>
+      </a>
+    <% } %>
+    
+    <% if (theme.social.telegram) { %>
+      <a href="https://t.me/<%= theme.social.telegram %>" target="_blank" rel="noopener" title="Telegram" class="social-link">
+        <i class="bi bi-telegram"></i>
+      </a>
+    <% } %>
+    
+    <% if (theme.social.linkedin) { %>
+      <a href="https://www.linkedin.com/in/<%= theme.social.linkedin %>" target="_blank" rel="noopener" title="LinkedIn" class="social-link">
+        <i class="bi bi-linkedin"></i>
+      </a>
+    <% } %>
+  </div>
+<% } %>

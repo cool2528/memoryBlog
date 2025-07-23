@@ -1,5 +1,52 @@
 <footer class="site-footer">
   <div class="container">
-    <p>© <%= new Date().getFullYear() %> <%= config.author || config.title %>. Powered by <a href="https://seeked.top" target="_blank">Memory</a>.</p>
+    <!-- 访问统计显示 -->
+    <% if (theme.analytics && theme.analytics.visitor_stats && theme.analytics.visitor_stats.enabled) { %>
+      <div class="footer-stats">
+        <%- partial('_partial/visitor-stats') %>
+      </div>
+    <% } %>
+    
+    <div class="footer-content">
+      <!-- 添加社交媒体链接 -->
+      <%- partial('_partial/social-links') %>
+      
+      <p>
+        <% if (theme.footer && theme.footer.copyright) { %>
+          <%- theme.footer.copyright %>
+        <% } else { %>
+          © <%= new Date().getFullYear() %> <%= config.author || config.title %>.
+        <% } %>
+        
+        <% if (!theme.footer || theme.footer.powered_by !== false) { %>
+          Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>
+        <% } %>
+        
+        <% if (!theme.footer || theme.footer.theme_info !== false) { %>
+          & <a href="https://seeked.top" target="_blank" rel="noopener">Memory</a>.
+        <% } %>
+      </p>
+      
+      <!-- 备案信息 -->
+      <% if (theme.footer && (theme.footer.icp || theme.footer.police)) { %>
+        <div class="footer-beian">
+          <% if (theme.footer.icp) { %>
+            <span class="icp">
+              <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">
+                <%= theme.footer.icp %>
+              </a>
+            </span>
+          <% } %>
+          
+          <% if (theme.footer.police) { %>
+            <span class="police">
+              <a href="http://www.beian.gov.cn/" target="_blank" rel="noopener">
+                <%= theme.footer.police %>
+              </a>
+            </span>
+          <% } %>
+        </div>
+      <% } %>
+    </div>
   </div>
 </footer> 

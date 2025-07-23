@@ -73,10 +73,17 @@ document.addEventListener('DOMContentLoaded', function() {
             <div id="searchResults" class="search-results" style="display: none;"></div>
         `;
         
-        // 插入到header的导航栏中
+        // 插入到header的导航栏中，确保不会遮挡主题切换按钮
         const headerContainer = document.querySelector('.site-header .container');
         if (headerContainer) {
-            headerContainer.appendChild(searchContainer);
+            // 查找或创建右侧控制区域
+            let rightControls = document.querySelector('.header-right-controls');
+            if (!rightControls) {
+                rightControls = document.createElement('div');
+                rightControls.className = 'header-right-controls';
+                headerContainer.appendChild(rightControls);
+            }
+            rightControls.appendChild(searchContainer);
         }
         
         // 搜索功能（简单的客户端搜索）
@@ -248,10 +255,19 @@ document.addEventListener('DOMContentLoaded', function() {
         themeToggle.setAttribute('aria-label', '切换主题');
         themeToggle.title = '切换暗色/亮色主题';
         
-        // 添加到导航栏
-        const nav = document.querySelector('.site-nav');
-        if (nav) {
-            nav.appendChild(themeToggle);
+        // 添加到header容器的右侧控制区域，与搜索框一起
+        let rightControls = document.querySelector('.header-right-controls');
+        if (!rightControls) {
+            // 如果右侧控制区域不存在，创建一个
+            const headerContainer = document.querySelector('.site-header .container');
+            if (headerContainer) {
+                rightControls = document.createElement('div');
+                rightControls.className = 'header-right-controls';
+                headerContainer.appendChild(rightControls);
+            }
+        }
+        if (rightControls) {
+            rightControls.appendChild(themeToggle);
         }
         
         // 检查本地存储的主题设置并同步到body和html
@@ -284,15 +300,31 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // 初始化所有功能
+    // 初始化所有功能 - 先创建右侧控制区域，然后按顺序添加元素
     initBackToTop();
     initReadingProgress();
+    
+    // 先确保右侧控制区域存在
+    const headerContainer = document.querySelector('.site-header .container');
+    if (headerContainer) {
+        let rightControls = document.querySelector('.header-right-controls');
+        if (!rightControls) {
+            rightControls = document.createElement('div');
+            rightControls.className = 'header-right-controls';
+            rightControls.style.cssText = 'display: flex !important; align-items: center; gap: 1rem; margin-left: auto; z-index: 50;';
+            headerContainer.appendChild(rightControls);
+        }
+    }
+    
+    // 先初始化搜索功能
     initSearch();
+    // 然后初始化主题切换按钮
+    initThemeToggle();
+    // 初始化其他功能
     initLazyLoading();
     initSmoothScrolling();
     initTableOfContents();
     enhanceCodeBlocks();
-    initThemeToggle();
     
     // 移除加载状态，显示页面内容
     document.body.classList.remove('theme-loading');

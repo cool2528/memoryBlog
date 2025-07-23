@@ -1,0 +1,95 @@
+<!-- 访问统计显示 -->
+<% if (theme.analytics && theme.analytics.visitor_stats && theme.analytics.visitor_stats.enabled) { %>
+  <div class="visitor-stats">
+    <div class="stats-container">
+      <% if (theme.analytics.visitor_stats.show_pv) { %>
+        <div class="stat-item">
+          <i class="bi bi-eye"></i>
+          <span class="stat-label">本站访问量</span>
+          <span class="stat-value" id="site-pv">-</span>
+        </div>
+      <% } %>
+      
+      <% if (theme.analytics.visitor_stats.show_uv) { %>
+        <div class="stat-item">
+          <i class="bi bi-people"></i>
+          <span class="stat-label">访客数</span>
+          <span class="stat-value" id="site-uv">-</span>
+        </div>
+      <% } %>
+      
+      <% if (page.layout === 'post') { %>
+        <div class="stat-item">
+          <i class="bi bi-file-text"></i>
+          <span class="stat-label">本文阅读量</span>
+          <span class="stat-value" id="page-pv">-</span>
+        </div>
+      <% } %>
+    </div>
+  </div>
+
+  <script>
+    // 访问统计功能
+    document.addEventListener('DOMContentLoaded', function() {
+      // 获取或初始化访问统计
+      function updateVisitorStats() {
+        const sitePvElement = document.getElementById('site-pv');
+        const siteUvElement = document.getElementById('site-uv');
+        const pagePvElement = document.getElementById('page-pv');
+        
+        // 从 localStorage 获取统计数据
+        let siteStats = JSON.parse(localStorage.getItem('site-stats') || '{"pv": 0, "uv": 0}');
+        let pageStats = JSON.parse(localStorage.getItem('page-stats') || '{}');
+        
+        // 获取当前页面路径
+        const currentPath = window.location.pathname;
+        
+        // 检查是否是新访客
+        const lastVisit = localStorage.getItem('last-visit');
+        const today = new Date().toDateString();
+        const isNewVisitor = lastVisit !== today;
+        
+        // 更新站点统计
+        siteStats.pv += 1;
+        if (isNewVisitor) {
+          siteStats.uv += 1;
+          localStorage.setItem('last-visit', today);
+        }
+        
+        // 更新页面统计
+        if (!pageStats[currentPath]) {
+          pageStats[currentPath] = 0;
+        }
+        pageStats[currentPath] += 1;
+        
+        // 保存到 localStorage
+        localStorage.setItem('site-stats', JSON.stringify(siteStats));
+        localStorage.setItem('page-stats', JSON.stringify(pageStats));
+        
+        // 更新显示
+        if (sitePvElement) sitePvElement.textContent = siteStats.pv.toLocaleString();
+        if (siteUvElement) siteUvElement.textContent = siteStats.uv.toLocaleString();
+        if (pagePvElement) pagePvElement.textContent = pageStats[currentPath].toLocaleString();
+        
+        <% if (theme.analytics.visitor_stats.api_url) { %>
+          // 如果配置了 API，发送统计数据到服务器
+          fetch('<%= theme.analytics.visitor_stats.api_url %>', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              path: currentPath,
+              title: document.title,
+              referrer: document.referrer,
+              timestamp: Date.now()
+            })
+          }).catch(err => console.log('统计上报失败:', err));
+        <% } %>
+      }
+      
+      // 延迟执行，避免影响页面加载
+      setTimeout(updateVisitorStats, 1000);
+    });
+  </script>
+<% } %>

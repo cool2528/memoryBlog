@@ -4,6 +4,15 @@
     <span class="post-date"><i class="bi bi-calendar3"></i> <%= date(page.date, 'YYYY-MM-DD') %></span>
     <span class="post-words"><i class="bi bi-file-earmark-word"></i> <%= wordcount(page.content) %> 字</span>
     <span class="post-time"><i class="bi bi-clock"></i> <%= min2read(page.content) %> 分钟</span>
+    
+    <!-- 文章阅读量统计 -->
+    <% if (theme.analytics && theme.analytics.visitor_stats && theme.analytics.visitor_stats.enabled) { %>
+      <span class="post-views">
+        <i class="bi bi-eye"></i>
+        <span id="page-pv">-</span> 次阅读
+      </span>
+    <% } %>
+    
     <% if (page.tags && page.tags.length) { %>
       <span class="post-tags">
         <i class="bi bi-tags"></i>

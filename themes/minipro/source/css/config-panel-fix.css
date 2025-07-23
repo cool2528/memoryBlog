@@ -1,0 +1,71 @@
+/* 配置面板样式修复 */
+
+/* 配置按钮样式 */
+.config-toggle-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease;
+  margin-left: 0.5rem;
+  z-index: 10;
+}
+
+.config-toggle-btn:hover {
+  color: var(--primary);
+  background-color: var(--border-light);
+}
+
+/* 确保配置按钮在右侧控制区域中正确显示 */
+.header-right-controls .config-toggle-btn {
+  order: 3;
+}
+
+/* 配置面板暗色模式适配 */
+.dark-theme .config-panel {
+  background: var(--surface);
+  color: var(--text-primary);
+  border-color: var(--border);
+}
+
+.dark-theme .config-panel-header {
+  background: var(--border);
+  color: var(--text-primary);
+}
+
+.dark-theme .config-panel-close {
+  color: var(--text-primary);
+}
+
+.dark-theme .config-section {
+  border-bottom-color: var(--border);
+}
+
+.dark-theme .config-item label {
+  color: var(--text-secondary);
+}
+
+.dark-theme .config-actions button {
+  background: var(--border);
+  color: var(--text-primary);
+}
+
+.dark-theme .config-actions button:hover {
+  background: var(--primary);
+  color: white;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .config-panel {
+    width: 90%;
+    max-width: 350px;
+  }
+  
+  .header-right-controls .config-toggle-btn {
+    margin-left: 0.5rem;
+  }
+}
